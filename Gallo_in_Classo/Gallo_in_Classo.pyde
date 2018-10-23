@@ -1,44 +1,45 @@
 """
-The following code is for our Landscape assignment
+Title: Gallo in Classo
+Created by: Sridhar Sairam
+Last modification made on: Tuesday October 23, 2018
 
-By: Sridhar Sairam
-October 20, 2018
-
-Mr. Gallo, I downloaded your picture for this amazing project.
-
-So... yea. There was a reason.
+This project was created for:
+    Landscape Homework Assignment - Due: Tuesday October 23, 2018
+    (Teacher: Daniel Gallo)
 
 You will also need the minim library which you can download at the following link:
     (This is for audio)
-    (I just went overboard...)
 http://code.compartmental.net/minim/
 
-I spent a LOT of time finding out how to ust the isPlaying() function
-... to not be able to
-I just created my own boolean to see if it is playing or not playing
-I also spent A LOOOT of time finding out how the player. function works.
+This Code does the following:
+    When any key is pressed and held:
+        The character will move across the screen.
+        The students, desks, chairs and the posters will stop moving and the students will be surprised.
+    When the character is on the screen:
+        Chopin's Revolutoinary Etude will play
+    When the characater is off screen:
+        The music will pause
+    When keys are not pressed:
+        The character will stop moving
+        The posters, students, desks and chairs will loop around.
+        
+EXTRA NOTES:
 
-WOW! There is barely ANY python documentation about this, yet there is a python library
+I spent a LONG time trying to get the MINIM library to work. All of the documentation that I found
+was all in Java, despite the library being compatible with Python. Wow.
 
-I went crazy for the first time using Processing....
-Coding is fun.
+This landscape is basically a portrayal of our ICS3U1b Period 1 Classroom. I just exaggerated just A LITTLE bit. hehehe
 
-LANDSCAPE INFO:
-Based on a kinda true story
-The landscape is ICS3U1b
-Our classroom
-Might have taken a bit of writers liberty
+I downloaded your picture for this project, that's why. I thought it would be funny.
 
-The two different things you can do:
-    1. Press and hold any key
-    2. Don't press any key
-Two different landscapes will loop through
+Man I had an AMAZING time; this being my first time using processing, I loved it!
+
+I had to make my own isPlaying() function as I couldn't get it to work ... If you know how to use this please explain it to me. It would be amazing!
 
 Hope you enjoy!
 """
-#VaRiAbLeS
 playing = False
-
+    
 for_loop_x = 20
 for_loop_y = 10
 
@@ -85,18 +86,88 @@ chair1_x = chair_x + 250
 chair1_y = chair_y
 desk1_x = desk_x + 250
 
-
 def setup():
     size(640, 480) #size of display
+    
+    #VaRiAbLeS
+    
+    global minim
+    global player
+    
+    global playing
+    
+    global for_loop_x
+    global for_loop_y
+    
+    global wild_x
+    global wild_y
+    
+    global while_loop_x
+    global while_loop_y
+    
+    global waist_x
+    global waist_y
+    
+    global right_foot_x
+    global right_foot_y
+    
+    global left_foot_x
+    global left_foot_y
+    
+    global shoulder_x
+    global shoulder_y
+    
+    global left_palm_x
+    global left_palm_y
+    
+    global right_palm
+    global left_palm_y
+    
+    global neck_x
+    global neck_y
+    
+    global head_x
+    global head_y
+    
+    global face_x
+    global face_y
+    
+    global desk_x
+    global desk_y
+    
+    global chair_x
+    global chair_y
+    
+    global chair1_x
+    global chair1_y
+    global desk1_x
+    
+    global chair1_x
+    global chair1_y
+    global desk1_x
+    
+    global face
+    global wild_poster
+    global while_poster
+    global for_poster
+    global student_normal
+    global student_scared
     
     #import and load stuff so that the music works
     add_library('minim')
     minim = Minim(this)
     player = minim.loadFile("Chopin - Revolutionary Etude.mp3")
-    global minim
-    global player
+    
+    #Loading images ... Beep boop beep boop...
+    face = loadImage("Gallo.png") #face
+    wild_poster = loadImage("Wild-Things.jpg") #poster
+    while_poster = loadImage("While-loop.png") #while loop poster
+    for_poster = loadImage("For-loop.png") #for loop poster
+    student_normal = loadImage("Normal.png") #student face normal
+    student_scared = loadImage("Scared.png") #student face when Mr. Gallo is near\
 
 def moving_wall():    
+    
     global desk_x
     global chair_x
     global chair1_x
@@ -115,9 +186,9 @@ def moving_wall():
     while_loop_x += 2
     wild_x += 2
     
-    #print("For loop: " + str(for_loop_x))
-    #print("While loop: " + str(while_loop_x))
-    #print("Wild: " + str(wild_x))
+    ##print("For loop: " + str(for_loop_x))
+    ##print("While loop: " + str(while_loop_x))
+    ##print("Wild: " + str(wild_x))
     
     left_by = 850
     lim = 650
@@ -137,7 +208,6 @@ def moving_wall():
         chair1_x -= left_by
     if desk1_x >= lim:
         desk1_x -= left_by
-    
 
 def moving_man():
     global left_foot_x
@@ -150,12 +220,12 @@ def moving_man():
     global head_x
     global face_x
     
-    move = 25
+    move = 10
     
     if left_foot_x - 50 > right_foot_x:
         left_foot_x, right_foot_x = right_foot_x, left_foot_x #swapping legs for moving
-        #print("Right re: " + str(right_foot_x)) #Here for debugging purposes
-        #print("Left re: "  + str(left_foot_x)) #Here for debugging purposes
+        ##print("Right re: " + str(right_foot_x)) #Here for debugging purposes
+        ##print("Left re: "  + str(left_foot_x)) #Here for debugging purposes
     else:
         #FORWARD MARCH!
         left_foot_x += 2 * move
@@ -166,8 +236,8 @@ def moving_man():
         left_palm_x += 1 * move
         head_x += 1 * move
         face_x += 1 * move
-        #print("Right: " + str(right_foot_x))
-        #print("Left: "  + str(left_foot_x))
+        ##print("Right: " + str(right_foot_x))
+        ##print("Left: "  + str(left_foot_x))
 
     if left_palm_x >= 650:
         come_from_left = 775 #distance to loop back 
@@ -186,13 +256,6 @@ def moving_man():
 
 def draw():
     frameRate(30)
-    #Loading images ... Beep boop beep boop...
-    face = loadImage("Gallo.png") #face
-    wild_poster = loadImage("Wild-Things.jpg") #poster
-    while_poster = loadImage("While-loop.png") #while loop poster
-    for_poster = loadImage("For-loop.png") #for loop poster
-    student_normal = loadImage("Normal.png") #student face normal
-    student_scared = loadImage("Scared.png") #student face when Mr. Gallo is near
     
     #RESETTING BACKGROUND
     background(255, 235, 205) #wall
@@ -256,19 +319,19 @@ def draw():
         right_foot_x <= 0 and left_foot_x <= 0):
         image(student_normal, chair_x - 2, chair_y - 62, 25, 25) #normal face
         image(student_normal, chair1_x - 2, chair1_y - 62, 25, 25)
-        print(playing)
+        #print(playing)
         if playing == True:
             player.pause()
             playing = False
-        print(playing)
+        #print(playing)
     else:
         image(student_scared, chair_x - 2, chair_y - 62, 25, 25) #face scared
         image(student_scared, chair1_x - 2, chair1_y - 62, 25, 25)    
-        print(playing)
+        #print(playing)
         if playing == False:
             player.loop()
             playing = True
-        print(playing)
+        #print(playing)
             
     #BODY
     line(right_foot_x, right_foot_y, waist_x, waist_y) #right leg
